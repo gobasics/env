@@ -6,8 +6,7 @@ import (
 
 // Get reads key from the environment and returns Value
 func Get(key string) Value {
-	var s = os.Getenv(key)
-	return Value(s)
+	return Value(os.Getenv(key))
 }
 
 // Lookup reads key from the environment, it returns (Value, true)
