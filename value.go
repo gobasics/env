@@ -26,8 +26,16 @@ func (v Value) Int() (int, error) {
 	return strconv.Atoi(string(v))
 }
 
+func (v Value) Str() string {
+	return v.String()
+}
+
 func (v Value) String() string {
 	return string(v)
+}
+
+func (v Value) StrSlice(delimiter string) []string {
+	return v.StringSlice(delimiter)
 }
 
 func (v Value) StringSlice(delimiter string) []string {
