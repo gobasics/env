@@ -2,6 +2,6 @@ package env
 
 type Config string
 
-func (v Config) String() string {
-	return string(v)
+func (c Config) String() string {
+	return string(c)
 }
