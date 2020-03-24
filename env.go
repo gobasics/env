@@ -32,6 +32,11 @@ func Int(i *int, key string) error {
 	return nil
 }
 
+func Str(s *string, key string) error {
+	*s = os.Getenv(key)
+	return nil
+}
+
 type Value interface {
 	Set(string) error
 	String() string
