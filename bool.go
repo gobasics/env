@@ -8,7 +8,7 @@ import (
 func Bool(b *bool, key string) error {
 	s, ok := os.LookupEnv(key)
 	if !ok {
-		return unsetErr(key)
+		return notFoundErr(key)
 	}
 	switch s {
 	case "0":

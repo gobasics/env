@@ -8,7 +8,7 @@ import (
 func Int(i *int, key string) error {
 	s, ok := os.LookupEnv(key)
 	if !ok {
-		return unsetErr(key)
+		return notFoundErr(key)
 	}
 	v, err := strconv.Atoi(s)
 	if err != nil {

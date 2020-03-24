@@ -5,7 +5,7 @@ import "os"
 func Str(s *string, key string) error {
 	str, ok := os.LookupEnv(key)
 	if !ok {
-		return unsetErr(key)
+		return notFoundErr(key)
 	}
 	*s = str
 	return nil

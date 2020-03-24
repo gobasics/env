@@ -10,14 +10,14 @@ type Value interface {
 	String() string
 }
 
-func unsetErr(key string) error {
-	return fmt.Errorf("%+s is not set", key)
+func notFoundErr(key string) error {
+	return fmt.Errorf("%+s was not found in the environment", key)
 }
 
 func Var(v Value, key string) error {
 	s, ok := os.LookupEnv(key)
 	if !ok {
-		return unsetErr(key)
+		return notFoundErr(key)
 	}
 	return v.Set(s)
 }
