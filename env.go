@@ -3,45 +3,21 @@ package env
 import (
 	"fmt"
 	"os"
-	"strconv"
 )
-
-func Bool(b *bool, key string) error {
-	s := os.Getenv(key)
-	switch s {
-	case "0":
-		*b = false
-	case "false":
-		*b = false
-	case "1":
-		*b = true
-	case "true":
-		*b = true
-	default:
-		return fmt.Errorf("%+s:%+s is not a valid bool value", key, s)
-	}
-	return nil
-}
-
-func Int(i *int, key string) error {
-	v, err := strconv.Atoi(os.Getenv(key))
-	if err != nil {
-		return err
-	}
-	*i = v
-	return nil
-}
-
-func Str(s *string, key string) error {
-	*s = os.Getenv(key)
-	return nil
-}
 
 type Value interface {
 	Set(string) error
 	String() string
 }
 
+func unsetErr(key string) error {
+	return fmt.Errorf("%+s is not set", key)
+}
+
 func Var(v Value, key string) error {
-	return v.Set(os.Getenv(key))
+	s, ok := os.LookupEnv(key)
+	if !ok {
+		return unsetErr(key)
+	}
+	return v.Set(s)
 }
